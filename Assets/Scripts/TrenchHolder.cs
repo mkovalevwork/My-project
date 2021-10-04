@@ -3,19 +3,10 @@ using UnityEngine;
 
 public class TrenchHolder : MonoBehaviour
 {
-    private bool listIsEmpty;
+    private bool listIsEmpty = true;
     public bool ListIsEmpty => listIsEmpty;
 
     public List<GameObject> units = new List<GameObject>();
-
-    public delegate void SomeAction();
-
-    public event SomeAction gameStartAction;
-
-    private void Start()
-    {
-        listIsEmpty = true;
-    }
 
     private void OnTriggerEnter(Collider other)
     {       
@@ -35,16 +26,6 @@ public class TrenchHolder : MonoBehaviour
 
     private void CheckList()
     {
-        if (units.Count == 0)
-        {
-            listIsEmpty = true;
-        }
-        else
-            listIsEmpty = false;
-    }
-
-    public void OnClickMoveBtn()
-    {
-        gameStartAction?.Invoke();
+        listIsEmpty = units.Count == 0;
     }
 }

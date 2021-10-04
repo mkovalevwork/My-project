@@ -2,26 +2,13 @@ using UnityEngine;
 
 public class ButtonFunctions : MonoBehaviour
 {
-    public GameObject unitToSpawn;
-    public Transform transformToSpawn;
-    private int roadNumber;
+    [Header("Scene References")] [SerializeField]
     private SpawnsHolder spawnHolder;
 
-    private void Start()
-    {        
-        spawnHolder = GameObject.FindGameObjectWithTag("DataHolder").GetComponent<SpawnsHolder>();
-    }
+    [SerializeField] private EntityHandler entityHandler;
 
-    public void Spawn()
+    public void SpawnRandomUnit()
     {
-        roadNumber = Random.Range(0, 7);
-        Instantiate(unitToSpawn, spawnHolder.TakeSpawn(roadNumber).position, Quaternion.identity);
-        
+        entityHandler.OnRandomEntityRequest(spawnHolder.GetRandomSpawnPosition().position);
     }
-
-    public void GoNext()
-    {
-
-    }
-    
 }
